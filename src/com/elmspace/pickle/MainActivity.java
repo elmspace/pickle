@@ -36,6 +36,19 @@ public class MainActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
+		// When SignUp activity calls back the MainActivity after signing up, it
+		// will be sending a msg, which we are grabbing here
+		try{
+		Bundle Msg_from_SignUp_Activity = getIntent().getExtras();
+		if (!Msg_from_SignUp_Activity.isEmpty()) {
+			textView = (TextView) findViewById(R.id.textView);
+			String msg = Msg_from_SignUp_Activity.getString("Msg");
+			textView.setText(msg);
+		}
+		}catch (Exception ex){
+			// Do nothing.
+		}
+
 		email = (EditText) findViewById(R.id.editText_email);
 		password = (EditText) findViewById(R.id.editText_password);
 
@@ -64,6 +77,14 @@ public class MainActivity extends AppCompatActivity {
 			}
 		});
 
+	}
+
+	// *******************************************************************************************
+	// *******************************************************************************************
+	// This will redirect you to the signup activity
+	public void signUp(View view) {
+		Intent intent = new Intent(MainActivity.this, SignUp.class);
+		startActivity(intent);
 	}
 
 	// *******************************************************************************************
@@ -182,7 +203,7 @@ public class MainActivity extends AppCompatActivity {
 			} catch (Exception ex) {
 				Message msg = handler.obtainMessage();
 				Bundle bundle = new Bundle();
-				String info = "Cant connect to the data base!!!";
+				String info = "Cant connect to the server!!!";
 				bundle.putString("sendBack", info);
 				msg.setData(bundle);
 				handler.sendMessage(msg);
@@ -192,7 +213,7 @@ public class MainActivity extends AppCompatActivity {
 				} catch (Exception ex) {
 					Message msg = handler.obtainMessage();
 					Bundle bundle = new Bundle();
-					String info = "Cant connect to the data base2!!!";
+					String info = "Cant connect to the server!!!";
 					bundle.putString("sendBack", info);
 					msg.setData(bundle);
 					handler.sendMessage(msg);
@@ -229,15 +250,5 @@ public class MainActivity extends AppCompatActivity {
 			handler.sendMessage(msg);
 		}
 	}
-
-	// *******************************************************************************************
-	// *******************************************************************************************
-	// This will redirect you to the signup activity
-	public void singUp(View view){
-		Intent intent = new Intent(MainActivity.this,SignUp.class);
-		intent.putExtra("ExtaInfoIfNeeded"," ");
-		startActivity(intent);
-	}
-	
 
 }

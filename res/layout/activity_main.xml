@@ -52,11 +52,11 @@
         android:inputType="textEmailAddress" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/button_signup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/button_login"
-        android:layout_alignTop="@+id/textView"
+        android:layout_below="@+id/button_login"
         android:onClick="signUp"
         android:text="SignUp" />
 

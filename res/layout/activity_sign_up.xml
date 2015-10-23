@@ -5,84 +5,77 @@
     tools:context="${relativePackage}.${activityClass}" >
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/textView"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:text="Large Text"
+        android:layout_centerHorizontal="true"
         android:gravity="center"
+        android:layout_marginTop="25dp"
+        android:text=""
         android:textAppearance="?android:attr/textAppearanceLarge" />
-
+    
+    
     <EditText
-        android:id="@+id/editText1"
+        android:id="@+id/editText_FirstName"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/textView1"
-        android:hint="First Name"
-        android:gravity="center"
-        android:ems="10" >
-    </EditText>
-
-    <EditText
-        android:id="@+id/editText2"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/editText1"
-        android:hint="Last Name"
-        android:gravity="center"
-        android:ems="10" />
-
-    <EditText
-        android:id="@+id/editText3"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/editText2"
+        android:layout_below="@+id/textView"
         android:ems="10"
+        android:gravity="center"
+        android:hint="First Name" />
+
+    <EditText
+        android:id="@+id/editText_LastName"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/editText_FirstName"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="Last Name" />
+
+    <EditText
+        android:id="@+id/editText_Email"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/editText_LastName"
+        android:ems="10"
+        android:gravity="center"
         android:hint="Email"
-        android:gravity="center"
-        android:inputType="textEmailAddress" >
-
-        <requestFocus />
-    </EditText>
+        android:inputType="textEmailAddress" />
 
     <EditText
-        android:id="@+id/editText4"
+        android:id="@+id/editText_Password"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/editText3"
+        android:layout_below="@+id/editText_Email"
         android:ems="10"
-        android:hint="Password"
         android:gravity="center"
+        android:hint="Password"
         android:inputType="textPassword" />
 
     <EditText
-        android:id="@+id/editText5"
+        android:id="@+id/editText_RePassword"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/editText4"
+        android:layout_below="@+id/editText_Password"
         android:ems="10"
-        android:hint="Retyped Password"
         android:gravity="center"
+        android:hint="Retyped Password"
         android:inputType="textPassword" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/button_Submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editText5"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginBottom="100dp"
         android:text="Submit" />
 
 </RelativeLayout>
