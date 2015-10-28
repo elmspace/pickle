@@ -66,8 +66,20 @@
         android:layout_below="@+id/editText_Password"
         android:ems="10"
         android:gravity="center"
-        android:hint="Retyped Password"
+        android:hint="Retype Password"
         android:inputType="textPassword" />
+    
+     <EditText
+        android:id="@+id/editText_FriendEmail"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/editText_RePassword"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="Your Friend's email"
+        android:inputType="textEmailAddress" />
+    
 
     <Button
         android:id="@+id/button_Submit"
@@ -75,7 +87,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="80dp"
         android:text="Submit" />
 
 </RelativeLayout>

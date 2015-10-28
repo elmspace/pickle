@@ -10,12 +10,14 @@ public class DataFromDatabase {
 	private static String UserEmail = null;
 	private static String UserStatus = null;
 	private static int UserID = 0;
+	private static String FriendOn = null;
+	private static String FriendFirstName = null;
 
 	// This method will set the private variables of this class
 	public void setUserData(String setuserdata_UserStatus,
 			String setuserdata_UserName, String setuserdata_UserFirstName,
 			String setuserdata_UserLastName, String setuserdata_UserEmail,
-			String setuserdata_UserFriend, int setuserdata_UserID) {
+			String setuserdata_UserFriend, int setuserdata_UserID, String setuserdata_FriendOn, String setuserdata_FriendFirstName) {
 
 		UserStatus = setuserdata_UserStatus;
 		UserFirstName = setuserdata_UserFirstName;
@@ -24,6 +26,8 @@ public class DataFromDatabase {
 		UserEmail = setuserdata_UserEmail;
 		UserID = setuserdata_UserID;
 		UserName = setuserdata_UserEmail;
+		FriendOn = setuserdata_FriendOn;
+		FriendFirstName = setuserdata_FriendFirstName;
 
 	}
 
@@ -54,6 +58,14 @@ public class DataFromDatabase {
 
 	public int getUserID() {
 		return UserID;
+	}
+	
+	public String getFriendOn() {
+		return FriendOn;
+	}
+	
+	public String getFriendFirstName() {
+		return FriendFirstName;
 	}
 
 	// Here we will make the methods and variables that take the info from

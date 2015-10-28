@@ -25,6 +25,8 @@ import android.widget.TextView;
 public class MsgActivity extends AppCompatActivity {
 
 	String MyUserName_global, FriendUserName_global, Msg;
+	String MyUserFirstName_global, FriendFirstName_global;
+	String sender, text;
 	TextView textView;
 	EditText editText_msg;
 	Handler mHandler = new Handler();
@@ -55,7 +57,18 @@ public class MsgActivity extends AppCompatActivity {
 			textView.setText("");
 			textView.setText(" " + "\n");
 			for (int i = 4; i > -1; i--) {
-				textView.append(msgs_sender[i] + " : " + msgs_text[i] + "\n");
+				if (msgs_text[i].equals(" ")) {
+					sender = " ";
+					text = " ";
+				} else {
+					text = msgs_text[i];
+					if (msgs_sender[i].equals(MyUserName_global)) {
+						sender = MyUserFirstName_global;
+					} else {
+						sender = FriendFirstName_global;
+					}
+				}
+				textView.append(sender + " : " + text + "\n");
 				textView.append(" " + "\n");
 			}
 
@@ -71,15 +84,15 @@ public class MsgActivity extends AppCompatActivity {
 		DataFromDatabase myUserInfo = new DataFromDatabase();
 		MyUserName_global = myUserInfo.getUserName();
 		FriendUserName_global = myUserInfo.getUserFriend();
+		MyUserFirstName_global = myUserInfo.getUserFirstName();
+		FriendFirstName_global = myUserInfo.getFriendFirstName();
 
 		// This is where we get the information sent by the activity that
 		// initiated this one
 		/*
-		Bundle extras = getIntent().getExtras();
-		if (extras != null) {
-			FriendUserName_global = extras.getString("Friend_User_Name");
-		}
-		*/
+		 * Bundle extras = getIntent().getExtras(); if (extras != null) {
+		 * FriendUserName_global = extras.getString("Friend_User_Name"); }
+		 */
 
 		// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -186,7 +199,7 @@ public class MsgActivity extends AppCompatActivity {
 		DataFromDatabase myUserInfo = new DataFromDatabase();
 		String User = myUserInfo.getUserName();
 		String ReplyTo = myUserInfo.getUserFriend();
-		
+
 		// These will contain the info we get from server
 		String serverReply = null;
 		String[] msgs_text = new String[5];

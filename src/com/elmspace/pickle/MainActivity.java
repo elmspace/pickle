@@ -128,6 +128,8 @@ public class MainActivity extends AppCompatActivity {
 		String lastname = null;
 		String email = null;
 		String friend = null;
+		String friendon = null;
+		String friendfirstname = null;
 		int id = 0;
 
 		// If the user entered empty user or password, yell at them
@@ -187,13 +189,15 @@ public class MainActivity extends AppCompatActivity {
 				email = jObject.getString("Email");
 				friend = jObject.getString("Friend");
 				id = jObject.getInt("ID");
+				friendon = jObject.getString("FriendOn");
+				friendfirstname = jObject.getString("FriendFirstName");
 
 				if (status.equals("True")) {
 					userData.setUserData(status, username, firstname, lastname,
-							email, friend, id);
+							email, friend, id, friendon, friendfirstname);
 				} else {
 					userData.setUserData(status, null, null, null, null, null,
-							0);
+							0,null,null);
 				}
 				// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 				// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

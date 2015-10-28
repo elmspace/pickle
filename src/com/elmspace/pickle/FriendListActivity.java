@@ -1,5 +1,6 @@
 package com.elmspace.pickle;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,7 @@ public class FriendListActivity extends AppCompatActivity {
 
 	TextView textView;
 
+	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -21,16 +23,19 @@ public class FriendListActivity extends AppCompatActivity {
 		textView = (TextView) findViewById(R.id.textView1);
 		textView.setText("Hello " + name);
 
-	}
+		String friendon = newdata.getFriendOn();
+		String friendfirstname = newdata.getFriendFirstName();
 
-	public void sendMsgToMe(View view) {
-		Intent intent = new Intent(FriendListActivity.this, MsgActivity.class);
+		if (friendon.equals("True")) {
+			Intent intent = new Intent(FriendListActivity.this,
+					MsgActivity.class);
+			intent.putExtra("Friend_User_Name", friendfirstname);
+			startActivity(intent);
+		} else {
+			textView = (TextView) findViewById(R.id.textView2);
+			textView.setText("Your friend has not signed up yet!");
+		}
 
-		DataFromDatabase newdata = new DataFromDatabase();
-		String friend = newdata.getUserFriend();
-
-		intent.putExtra("Friend_User_Name", friend);
-		startActivity(intent);
 	}
 
 }

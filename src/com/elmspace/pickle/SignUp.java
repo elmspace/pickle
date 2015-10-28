@@ -27,8 +27,8 @@ public class SignUp extends Activity {
 
 	// Global variables
 	TextView textView;
-	EditText firstname, lastname, email, password, re_password;
-	String Email, PassWord, Re_PassWord, FirstName, LastName;
+	EditText firstname, lastname, email, password, re_password, friendemail;
+	String Email, PassWord, Re_PassWord, FirstName, LastName, FriendEmail;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +41,7 @@ public class SignUp extends Activity {
 		email = (EditText) findViewById(R.id.editText_Email);
 		password = (EditText) findViewById(R.id.editText_Password);
 		re_password = (EditText) findViewById(R.id.editText_RePassword);
+		friendemail = (EditText) findViewById(R.id.editText_FriendEmail);
 
 		// Linking the button to the one on the pge
 		Button login = (Button) findViewById(R.id.button_Submit);
@@ -107,21 +108,25 @@ public class SignUp extends Activity {
 		Email = email.getText().toString();
 		PassWord = password.getText().toString();
 		Re_PassWord = re_password.getText().toString();
+		FriendEmail = friendemail.getText().toString();
 
 		// The reply from server is stored in here
 		String serverReply = null;
 		String status = null;
 
-		int PassWord_Match = 1;
-		/*
-		 * Here check if both password and re-password are the same If both
-		 * passwords mathc , set PassWord_Match = 1
-		 */
+		// Checking to make sure both password and re-password are the dame
+		// There is probably a better way of doing this
+		int PassWord_Match = 0;
+		if (PassWord.equals(Re_PassWord)) {
+			PassWord_Match = 1;
+		} else {
+			PassWord_Match = 0;
+		}
 
 		// If the user entered empty user or password, yell at them
 		if (!FirstName.isEmpty() && !LastName.isEmpty() && !Email.isEmpty()
 				&& !PassWord.isEmpty() && !Re_PassWord.isEmpty()
-				&& PassWord_Match != 0) {
+				&& !FriendEmail.isEmpty() && PassWord_Match != 0) {
 
 			// Create data variable for sending values to server
 			String data = URLEncoder.encode("FirstName", "UTF-8") + "="
@@ -132,6 +137,8 @@ public class SignUp extends Activity {
 					+ URLEncoder.encode(Email, "UTF-8");
 			data += "&" + URLEncoder.encode("PassWord", "UTF-8") + "="
 					+ URLEncoder.encode(PassWord, "UTF-8");
+			data += "&" + URLEncoder.encode("FriendEmail", "UTF-8") + "="
+					+ URLEncoder.encode(FriendEmail, "UTF-8");
 
 			// This is for reading the data from server
 			BufferedReader reader = null;
@@ -182,19 +189,35 @@ public class SignUp extends Activity {
 				// Here on, depending on the response from the server, we will
 				// do different call backs to our handler
 			} catch (Exception ex) {
-				Message msg = handler.obtainMessage();
-				Bundle bundle = new Bundle();
-				String info = "Cant connect to the server!!!";
-				bundle.putString("sendBack", info);
-				msg.setData(bundle);
-				handler.sendMessage(msg);
+				if (status.equals("True")) {
+					Message msg = handler.obtainMessage();
+					Bundle bundle = new Bundle();
+					String info = "True";
+					bundle.putString("sendBack", info);
+					msg.setData(bundle);
+					handler.sendMessage(msg);
+				} else if (status.equals("Exists")) {
+					Message msg = handler.obtainMessage();
+					Bundle bundle = new Bundle();
+					String info = "Someone with this email has already signed up!";
+					bundle.putString("sendBack", info);
+					msg.setData(bundle);
+					handler.sendMessage(msg);
+				} else {
+					Message msg = handler.obtainMessage();
+					Bundle bundle = new Bundle();
+					String info = "Please fill in all the required fields, and choose an appropriate password!";
+					bundle.putString("sendBack", info);
+					msg.setData(bundle);
+					handler.sendMessage(msg);
+				}
 			} finally {
 				try {
 					reader.close();
 				} catch (Exception ex) {
 					Message msg = handler.obtainMessage();
 					Bundle bundle = new Bundle();
-					String info = "Cant connect to the server!!!";
+					String info = "Poop";
 					bundle.putString("sendBack", info);
 					msg.setData(bundle);
 					handler.sendMessage(msg);
@@ -207,7 +230,7 @@ public class SignUp extends Activity {
 				bundle.putString("sendBack", info);
 				msg.setData(bundle);
 				handler.sendMessage(msg);
-			} else if (status.equals("False")) {
+			} else if (status.equals("Exists")) {
 				Message msg = handler.obtainMessage();
 				Bundle bundle = new Bundle();
 				String info = "Someone with this email has already signed up!";
@@ -217,7 +240,7 @@ public class SignUp extends Activity {
 			} else {
 				Message msg = handler.obtainMessage();
 				Bundle bundle = new Bundle();
-				String info = "Something has gone wrong! That's embarrassing :$";
+				String info = "Please fill in all the required fields, and choose an appropriate password!";
 				bundle.putString("sendBack", info);
 				msg.setData(bundle);
 				handler.sendMessage(msg);
